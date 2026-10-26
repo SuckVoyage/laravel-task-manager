@@ -46,7 +46,7 @@ class TaskController extends Controller
     {
         $validated = $this->validateRequst($request);
         $validated['user_id'] = $request->user()->id;
-        Task::create($validated);
+        $request->user()->tasks()->create($validated);
 
         //$this->repository->insert($validated);
 
