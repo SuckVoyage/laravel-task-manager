@@ -2,12 +2,13 @@
     <x-slot:title>Все задачи</x-slot:title>
     @isset($users, $roles)
         <x-slot:admin>
-            <x-admin-form :users="$users" :roles="$roles" />
+            {{-- <x-admin-form :users="$users" :roles="$roles" /> --}}
+            <livewire:assign-role />
         </x-slot:admin>
     @endisset
     <x-slot>
         <h1>Все Задачи</h1>
-        <div class="grid3">
+        {{-- <div class="grid3">
             @forelse ($tasks as $task)
                 <div>{{ $task->id }}</div>
                 <div><a href="/task/view/ {{ $task->id }}">{{ $task->title }}</a></div>
@@ -15,7 +16,8 @@
             @empty
                 <div>Не найдено ни одной задачи</div>
             @endforelse
-        </div>
+        </div> --}}
+        <livewire:task-list/>
         <a href='task/add'>Добавить задачу</a>
     </x-slot>
     <x-slot:posts>

@@ -1,6 +1,10 @@
 <x-main-layout>
     <x-slot:title>Все роли</x-slot:title>
-
+    @if (auth()->user()?->roles()->where('name', 'Admin')->exists())
+        <x-slot:admin>
+            <livewire:assign-role />
+        </x-slot:admin>
+    @endif
     <h1>Все роли</h1>
 
     <div class="grid2">
