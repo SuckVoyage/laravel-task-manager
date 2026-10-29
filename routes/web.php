@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ Auth::routes();
 // Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 // Route::get('/verify', [AuthController::class, 'showVerify'])->name('verify');
-
+Route::get('/users', [UserController::class, 'showAll'])->name('users.all');
+Route::get('/roles', [UserController::class, 'showAllRoles'])->name('roles.all');
 Route::middleware('auth')->group(function (): void {
     Route::get('/tasks', [TaskController::class, 'showAll'])->name('tasks.index');
+    Route::post('/users/roles', [UserController::class, 'addRoleToUser'])->name('users.roles.store');
     Route::get('/task/add', [TaskController::class, 'showAddTask']);
     Route::get('/task/view/{task}', [TaskController::class, 'showOne'])->name('task.view');
     Route::get('/task/edit/{task}', [TaskController::class, 'showEdit']);

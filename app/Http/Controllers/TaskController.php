@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Role;
 use App\Models\Task;
+use App\Models\User;
 use App\Providers\TaskRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,15 +23,19 @@ class TaskController extends Controller
     public function showAll(Request $request): View
     {
         $user = $request->user();
-
+        $data = [];
         if ($user->roles()->where('name', 'Admin')->exists()){
-            $tasks = Task::all();
+            $data['tasks'] = Task::all();
+            $data['users'] = User::all();
+            $data['roles'] = Role::all();
         }
         else{
-            $tasks = $user->tasks()->get();
+            $data['tasks'] = $user->tasks()->get();
         }
 
-        return view('task.all', ['tasks' => $tasks]);
+        $data['posts'] = $user->posts()->with('tags')->get();
+
+        return view('task.all', $data);
     }
 
     public function showOne(Task $task): View

@@ -70,18 +70,19 @@
         </div>
         <div>
             <button type="submit">{{ $submit_label }}</button>
+        @if (strtoupper($method) === 'PUT')
+            <form
+                action="{{ route('task.delete', $task) }}"
+                method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Удалить</button>
+            </form>
+        @endif
         </div>
 
     </div>
 </form>
 
-@if (strtoupper($method) === 'PUT')
-    <form
-        action="{{ route('task.delete', $task) }}"
-        method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Удалить</button>
-    </form>
-@endif
+
 
