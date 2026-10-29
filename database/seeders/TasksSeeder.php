@@ -15,12 +15,12 @@ class TasksSeeder extends Seeder
         Task::query()->create([
             'title' => 'Сделать домашки',
             'due' => '2026-10-25',
-            'user_id' => 2,
+            'user_id' => 3,
             'urgency_id' => 1]);
         Task::query()->create([
             'title' => 'Съездить в магазин',
             'due' => '2026-10-23',
-            'user_id' => 1,
+            'user_id' => 2,
             'urgency_id' => 1]);
         Task::query()->create([
             'title' => 'Сделать уборку',

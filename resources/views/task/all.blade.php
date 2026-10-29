@@ -12,6 +12,16 @@
             @endforelse
         </div>
         <a href='task/add'>Добавить задачу</a>
+
+        <h1>Сообщения пользователя</h1>
+        @forelse (auth()->user()->posts as $post)
+            <h3>{{ $post->title }}</h3>
+            <div>{{ $post->content}}</div>
+        @empty
+            <div class="empty">Не найдено ни одного поста</div>
+        @endforelse
+
     </x-slot>
+
 </x-main-layout>
 

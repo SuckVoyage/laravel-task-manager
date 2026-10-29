@@ -19,7 +19,14 @@ class TaskController extends Controller
 
     public function showAll(Request $request): View
     {
-        $tasks = $request->user()->tasks()->get();
+        $user = $request->user();
+
+        if ($user->roles()->where('name', 'Admin')->exists()){
+            $tasks = Task::all();
+        }
+        else{
+            $tasks = $user->tasks()->get();
+        }
 
         return view('task.all', ['tasks' => $tasks]);
     }

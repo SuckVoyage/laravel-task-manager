@@ -20,6 +20,10 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
+        if ($user->roles()->where('name', 'Admin')->exists())
+            {
+                return true;
+            }
         return $task->user_id === $user->id;
     }
 
@@ -36,6 +40,10 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
+        if ($user->roles()->where('name', 'Admin')->exists())
+            {
+                return true;
+            }
         return $task->user_id === $user->id;
     }
 
@@ -44,6 +52,10 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
+        if ($user->roles()->where('name', 'Admin')->exists())
+            {
+                return true;
+            }
         return $task->user_id === $user->id;
     }
 
@@ -52,6 +64,10 @@ class TaskPolicy
      */
     public function restore(User $user, Task $task): bool
     {
+        if ($user->roles()->where('name', 'Admin')->exists())
+            {
+                return true;
+            }
         return false;
     }
 
@@ -60,6 +76,10 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task): bool
     {
+        if ($user->roles()->where('name', 'Admin')->exists())
+            {
+                return true;
+            }
         return false;
     }
 }

@@ -11,6 +11,9 @@
         @csrf
         <button type="submit">Выйти</button>
     </form>
+    <livewire:counter />
+    <livewire:mirror-text />
+    <livewire:create-post />
     {{ $slot }}
 </body>
 </html>
